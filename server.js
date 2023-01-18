@@ -1,9 +1,15 @@
 const express = require("express");
-const app = express();
-const PORT = process.env.PORT || 5000
+const cors = require("cors")
 const dbConnect = require("./dbConnect")
-app.use(express.json())
+
 const userRoute = require("./routes/userRoute")
+
+const app = express();
+
+
+app.use(express.json())
+
+app.use(cors())
 
 
 app.get("/", (req, res) => {
@@ -11,5 +17,7 @@ app.get("/", (req, res) => {
 })
 
 app.use("/api/user", userRoute)
+
+const PORT = process.env.PORT || 5000
 
 app.listen(PORT, () => console.log(`listening to port ${PORT}`))
